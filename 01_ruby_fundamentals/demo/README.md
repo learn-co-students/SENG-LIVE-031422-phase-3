@@ -11,8 +11,9 @@ To start, because we need to get used to Ruby, we'll be building a simpler appli
 ## Lecture Format
 
 Lectures will be split into 2 portions, with a 10 minute break in between.
-- Part 1: Demo of how to apply concepts from labs and lessons to our dog walker application
-- Part 2: Student Exercise in breakouts to apply concepts from demo to another codebase, followed by a review and discussion.
+- Part 1: Discussion of concepts and what kinds of functionality they related to
+- Part 2: Demo of how to apply concepts from labs and lessons to our dog walker application
+- Part 3: Question/Answer period and discussion of optional exercise code for extra practice
 ## Dog Walker CLI Part 1
 
 Over the next few weeks, we're going to be work on a dog walking application. As we introduce new features to it, we'll be using the concepts covered in the lessons and labs to demonstrate how they are applied to a real situation and put them to work! 
