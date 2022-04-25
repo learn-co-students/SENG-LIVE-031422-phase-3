@@ -10,7 +10,7 @@ To start, because we need to get used to Ruby, we'll be building a simpler appli
 
 ## Lecture Format
 
-Lectures will be split into 2 portions, with a 10 minute break in between.
+Lectures will be split into 3 portions, with a 10 minute break in between.
 - Part 1: Discussion of concepts and what kinds of functionality they related to
 - Part 2: Demo of how to apply concepts from labs and lessons to our dog walker application
 - Part 3: Question/Answer period and discussion of optional exercise code for extra practice
