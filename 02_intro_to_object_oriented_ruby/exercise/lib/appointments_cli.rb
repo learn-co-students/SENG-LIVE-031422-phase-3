@@ -79,12 +79,16 @@ def add_notes_to_appointment
     puts "#{index}. #{appt.patient} at #{appt.time} with #{appt.doctor}"
   end
   appt_index = ask_for_input.to_i - 1
-  until appt_index >= 0
-    puts "Whoops! That didn't work".red
-    puts "Please type the number corresponding to the dog you'd like to feed"
-    appt_index = ask_for_input.to_i - 1
-  end
   appointment = APPOINTMENTS[appt_index]
+  # check that there is an appointment and that appt_index 
+  # is not negative (it would be if the user typed a word
+  # instead of a number because "word".to_i => 0)
+  until appointment && appt_index >= 0
+    puts "Whoops! That didn't work".red
+    puts "Please type the number corresponding to the appointment you'd like to add notes for"
+    appt_index = ask_for_input.to_i - 1
+    appointment = APPOINTMENTS[appt_index]
+  end
   puts "What notes would you like to add?"
   appointment.notes = ask_for_input
   appointment.print
@@ -96,12 +100,16 @@ def cancel_an_appointment
     puts "#{index}. #{appt.patient} at #{appt.time} with #{appt.doctor}"
   end
   appt_index = ask_for_input.to_i - 1
-  until appt_index >= 0
-    puts "Whoops! That didn't work".red
-    puts "Please type the number corresponding to the dog you'd like to feed"
-    appt_index = ask_for_input.to_i - 1
-  end
   appointment = APPOINTMENTS[appt_index]
+  # check that there is an appointment and that appt_index 
+  # is not negative (it would be if the user typed a word
+  # instead of a number because "word".to_i => 0)
+  until appointment && appt_index >= 0
+    puts "Whoops! That didn't work".red
+    puts "Please type the number corresponding to the appointment you'd like to cancel"
+    appt_index = ask_for_input.to_i - 1
+    appointment = APPOINTMENTS[appt_index]
+  end
   appointment.cancel
   appointment.print
 end
