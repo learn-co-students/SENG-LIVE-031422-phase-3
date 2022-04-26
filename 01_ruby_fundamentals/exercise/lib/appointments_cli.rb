@@ -3,11 +3,10 @@ APPOINTMENTS = []
 def start_cli
   puts "Hi! Welcome to the Appointments CLI"
   main_menu
-  choice = ask_for_input
-  until choice == "exit"
-    handle_user_choice(choice)
+ 
+  loop do 
+    handle_user_choice(ask_for_choice)
     main_menu
-    choice = ask_for_input
   end
 end
 
@@ -19,9 +18,14 @@ def main_menu
   puts "Type the number corresponding to your choice, or 'exit' to leave the program".cyan
 end
 
-def ask_for_input
+def ask_for_choice
   print "What would you like to do? "
-  gets.chomp
+  choice = gets.chomp
+  if choice == "exit"
+    exit
+  else
+    choice
+  end
 end
 
 def handle_user_choice(choice)
@@ -31,7 +35,7 @@ def handle_user_choice(choice)
     list_appointments
   elsif choice == "debug"
     binding.pry
-  elsif choice == "exit"
+  elsif choice == "men"
     puts "Thank you for using the appointments CLI"
     exit
   else
