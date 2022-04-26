@@ -144,7 +144,7 @@ We'll be using this knowledge in our `needs_a_walk?` and `needs_a_meal?` methods
 
 Here's a sketch of the flow of the program we're going to create:
 
-![Program Flow](./program-flow.png)
+![Program Flow](./program-flow.drawio.svg)
 
 ## Important Errors To Understand
 
