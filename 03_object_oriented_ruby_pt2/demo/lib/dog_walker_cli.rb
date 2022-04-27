@@ -1,6 +1,3 @@
-DOGS = [
-  Dog.new("Lennon Snow", "almost 2", "Pomeranian", "Cheese")
-]
 
 def start_cli
   puts "Hi there! Welcome to the Dog Walker CLI".cyan
@@ -17,6 +14,8 @@ def print_menu_options
   puts "  2. List Dogs"
   puts "  3. To walk a Dog"
   puts "  4. To feed a Dog"
+  puts "  5. To view dogs that need walking"
+  puts "  6. To view dogs that need feeding"
   puts "type 'menu' to see these choices again"
   puts "or type exit at any point to leave the program"
 end
@@ -40,6 +39,10 @@ def handle_choice(choice)
     walk_dog
   elsif choice == "4"
     feed_dog
+  elsif choice == "5"
+    dogs_that_need_walking
+  elsif choice == "6"
+    dogs_that_need_feeding
   elsif choice == "debug"
     binding.pry
   elsif choice == "menu"
@@ -58,36 +61,33 @@ def add_dog
   breed = ask_for_choice
   print "What's your dog's favorite treats? "
   favorite_treats = ask_for_choice
-  # dog_hash = {
-  #   name: dog_name,
-  #   age: dog_age,
-  #   breed: dog_breed,
-  #   favorite_treats: dog_favorite_treats
-  # }
-  # DOGS << dog_hash
-  # print_dog(dog_hash)
-  dog = Dog.new(name, age, breed, favorite_treats)
-  DOGS << dog
+
+  dog = Dog.create(
+    name: name, 
+    age: age, 
+    breed: breed, 
+    favorite_treats: favorite_treats
+  )
   dog.print
 end
 
 def list_dogs
-  DOGS.each do |dog|
+  Dog.all.each do |dog|
     dog.print
   end
 end
 
 def walk_dog
   puts "Choose a dog to walk by its corresponding number"
-  DOGS.each.with_index(1) do |dog, num|
+  Dog.all.each.with_index(1) do |dog, num|
     puts "#{num}. #{dog.name}"
   end
   index = ask_for_choice.to_i - 1
-  dog = DOGS[index]
+  dog = Dog.all[index]
   until dog
     puts "Whoops! Please choose a number from the choices above".red
     index = ask_for_choice.to_i - 1
-    dog = DOGS[index]
+    dog = Dog.all[index]
   end
   dog.walk
   dog.print
@@ -95,19 +95,45 @@ end
 
 def feed_dog
   puts "Choose a dog to feed by its corresponding number"
-  DOGS.each.with_index(1) do |dog, num|
+  Dog.all.each.with_index(1) do |dog, num|
     puts "#{num}. #{dog.name}"
   end
   index = ask_for_choice.to_i - 1
-  dog = DOGS[index]
+  dog = Dog.all[index]
   # run a loop until we get a dog from their input
   until dog
     # while we don't have a dog give them an error
     # and ask again
     puts "Whoops! Please choose a number from the choices above".red
     index = ask_for_choice.to_i - 1
-    dog = DOGS[index]
+    dog = Dog.all[index]
   end
   dog.feed
   dog.print
+end
+
+# main menu option 5
+def dogs_that_need_walking
+  dogs_that_need_walking = Dog.needs_walking
+  if dogs_that_need_walking.empty?
+    puts "Everybody is walked!".green
+  else
+    puts "Here are all the dogs that need walking".blue
+    dogs_that_need_walking.each do |restless_dog|
+      restless_dog.print
+    end
+  end
+end
+
+# main menu option 6
+def dogs_that_need_feeding
+  dogs_that_need_feeding = Dog.needs_feeding
+  if dogs_that_need_feeding.empty?
+    puts "Everybody is fed!".green
+  else
+    puts "Here are all the dogs that need feeding".blue
+    dogs_that_need_feeding.each do |hungry_dog|
+      hungry_dog.print
+    end
+  end
 end

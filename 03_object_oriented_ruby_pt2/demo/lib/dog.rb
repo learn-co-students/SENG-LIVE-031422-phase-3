@@ -1,11 +1,38 @@
 class Dog
 
+  @@all = []
+
+  def self.all
+    @@all
+  end
+
+  def self.create(attributes)
+    self.new(attributes).save
+  end
+
+  def self.needs_walking
+    @@all.filter do |dog|
+      dog.needs_a_walk?
+    end
+  end
+
+  def self.needs_feeding
+    @@all.filter do |dog|
+      dog.needs_a_meal?
+    end
+  end
+
   attr_accessor :name, :age, :breed, :favorite_treats, :last_walked_at, :last_fed_at
-  def initialize(name, age, breed, favorite_treats)
+  def initialize(name:, age:, breed:, favorite_treats:)
     @name = name
     @age = age
     @breed = breed
     @favorite_treats = favorite_treats
+  end
+
+  def save
+    @@all << self
+    self
   end
 
   def walk
@@ -36,18 +63,18 @@ class Dog
   end
 
   def needs_a_meal?
-    if !@last_fed_at
-      true
-    else 
+    if @last_fed_at
       @last_fed_at < 15.seconds.ago
+    else 
+      true
     end
   end
 
   def needs_a_walk?
-    if !@last_walked_at
-      true
-    else
+    if @last_walked_at
       @last_walked_at < 10.seconds.ago
+    else
+      true
     end
   end
 
