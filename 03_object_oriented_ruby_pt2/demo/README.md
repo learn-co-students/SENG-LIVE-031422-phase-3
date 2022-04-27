@@ -7,7 +7,7 @@
 - How to use the `self` keyword and identify what it will refer to
 - Class variables vs Instance variables
 
-The methods we'll be working on today are related to persisting and retrieving Dogs/Appointments. These are important tasks that we'll continue to do as we introduce new concepts like databases and ActiveRecord later on in the week. The lectures coming up over the next few days will be introducing variations on the same themes. You'll be seeing how the new concepts apply to the applications we've been working on throughout the phase.
+The methods we'll be working on today are related to persisting and retrieving Dogs/Appointments. These are important tasks that we'll continue to do as we introduce new concepts like databases and ActiveRecord later on in the week. The lectures coming up over the next few days will be introducing variations on the same themes. You'll be seeing how the new concepts apply to the application we've been working on throughout the phase.
 
 ## Keyword Arguments & Mass Assignment
 
@@ -166,7 +166,7 @@ class Dog
 end
 ```
 
-I've got this class defined within `bin/test` which you can run using the following command:
+I've got this class defined within `bin/class_and_instace_methods_demo` which you can run using the following command:
 
 ```bash
 ./bin/class_and_instace_methods_demo
@@ -175,7 +175,7 @@ I've got this class defined within `bin/test` which you can run using the follow
 Once we do that, we can see:
 
 ```rb
-% ./bin/test
+% ./bin/class_and_instace_methods_demo
 Inside the Dog class, self is: Dog
 [1] pry(main)> Dog.all
 Inside a class method in the Dog class, self is: Dog
