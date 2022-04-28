@@ -1,4 +1,4 @@
-Dog.create(name: "Lennon",age: "1 year",breed: "Pomeranian",favorite_treats: "cheese")
+
 
 def start_cli
   puts "hello! Welcome to the Dog Walker CLI"

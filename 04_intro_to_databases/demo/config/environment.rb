@@ -7,6 +7,8 @@ require "active_support/core_ext/integer/time"
 require "active_support/core_ext/date/calculations"
 # One of our dependencies that we loaded in the previous expression was the require_all gem. It allows us to require all of the files within a directory. The path we pass to it will be relative to the root path of the project (where the Gemfile is). In our case, we're loading all of the files inside of the lib directory, so if we write code in there (like a method) it will be accessible to us after the require_all below
 
+# Constant called DB that will give us access to a set of methods that will
+# interact with the database stored at db/dog_walker.db
 DB = SQLite3::Database.new("db/dog_walker.db")
 DB.results_as_hash = true
 require_all "lib"
