@@ -1,5 +1,3 @@
-# Dog.create(name: "Lennon",age: "1 year",breed: "Pomeranian",favorite_treats: "cheese")
-
 def start_cli
   puts "hello! Welcome to the Dog Walker CLI"
   print_menu_options
@@ -57,7 +55,6 @@ def handle_user_choice(choice)
   else 
     puts "Whoops! I didn't understand your choice".red
   end
-  print_menu_options
 end
 
 def add_dog
