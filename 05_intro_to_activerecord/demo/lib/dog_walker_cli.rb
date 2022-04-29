@@ -3,12 +3,10 @@
 def start_cli
   puts "hello! Welcome to the Dog Walker CLI"
   print_menu_options
-  choice = ask_for_choice
-  until choice == "exit"
-    handle_user_choice(choice)
-    choice = ask_for_choice
+  loop do
+    handle_user_choice(ask_for_choice)
+    print_menu_options
   end
-  puts "Thank you for using the Dog Walker CLI!"
 end
 
 def print_menu_options
@@ -26,8 +24,13 @@ def print_menu_options
 end
 
 def ask_for_choice
-  print "What would you like to do? "
-  gets.chomp
+  choice = gets.chomp
+  if choice == "exit"
+    puts "Thanks for using the Dog Walker CLI! Have a nice day :)"
+    exit
+  else
+    choice
+  end
 end
 
 def handle_user_choice(choice)
@@ -60,13 +63,13 @@ end
 def add_dog
   puts "Sure! Let's add your dog!"
   print "What's your dog's name? "
-  name = gets.chomp
+  name = ask_for_choice
   print "What's your dog's age? "
-  age = gets.chomp
+  age = ask_for_choice
   print "What's your dog's breed? "
-  breed = gets.chomp
+  breed = ask_for_choice
   print "What are your dog's favorite treats? "
-  favorite_treats = gets.chomp
+  favorite_treats = ask_for_choice
   # make a new instance of dog with the user's answers
   dog = Dog.create(
     name: name,
@@ -101,11 +104,11 @@ def prompt_user_to_choose_dog
   Dog.all.each.with_index(1) do |dog, index|
     puts "#{index}. #{dog.name}"
   end
-  dog_index = gets.chomp.to_i - 1
+  dog_index = ask_for_choice.to_i - 1
   until dog_index >= 0
     puts "Whoops! That didn't work".red
     puts "Please type the number corresponding to the dog you'd like to choose"
-    dog_index = gets.chomp.to_i - 1
+    dog_index = ask_for_choice.to_i - 1
   end
   Dog.all[dog_index]
 end

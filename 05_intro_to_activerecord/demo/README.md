@@ -28,9 +28,8 @@
   - Look through documentation for the `has_many` association macro, discuss what it does and when we'd want to use it
   - Look through the db/seeds.rb file and run it
 - Part 3
-  - Open Question period & Review Important Topics:
-    - association macros and what they do
-    - 
+  - Open Question period & Recap/Review
+
 
 
 ## Dog Walker CLI Part 5
@@ -120,11 +119,11 @@ task :console do
 end
 ```
 
-This file descibes all of the rake tasks that will be accessible to me while I work on the project. To see a list of tasks I can use, I can run the following command in my terminal:
+This file describes all of the rake tasks that will be accessible to me while I work on the project. To see a list of tasks I can use, I can run the following command in my terminal:
 
-```bash
+<TerminalCommand>
 rake -T
-```
+</TerminalCommand>
 
 The tasks we'll be focusing on today are:
 
@@ -169,12 +168,10 @@ class CreateDogs < ActiveRecord::Migration[6.1]
 end
 ```
 - do we need to add an id column or is it added for us?
-  - ActiveRecord will create your id column (primary key) for you. No need to add it to the migration
 
 ### When would we need to migrate a database?
 - add a column/rename a column/add a new table
 - whenever we're changing the database structure
-- migrating the database to a new version of the schema
 
 ### How do we run a migration?
 
@@ -226,9 +223,6 @@ As with all methods, the reason you define them is so you can call them. So, if 
 Once we have our migrations and association methods set up, we can add some seeds to our database. This will ensure that we don't start from scratch when we run our CLI app.
 
 ```rb
-Walk.destroy_all
-Feeding.destroy_all
-Dog.destroy_all
 
 lennon = Dog.create(name: "Lennon", age: "1 year", breed: "Pomeranian", favorite_treats: "cheese")
 memphis = Dog.create(name: "Memphis", age: "2 years", breed: "Greyhound", favorite_treats: "bacon")
