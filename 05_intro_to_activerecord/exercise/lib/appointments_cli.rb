@@ -1,8 +1,10 @@
 def start_cli
   puts "Hi! Welcome to the Appointments CLI"
   main_menu
-  handle_user_choice
-  puts "Thanks for using the appointments CLI!"
+  loop do 
+    handle_user_choice(ask_for_input)
+    main_menu
+  end
 end
 
 def main_menu
@@ -17,30 +19,25 @@ def main_menu
   puts "Type the number corresponding to your choice, or 'exit' to leave the program".cyan
 end
 
-def handle_user_choice
-  input = gets.chomp 
-  while input != "exit" do
-    if input == "1"
-      add_appointment
-    elsif input == "2"
-      Appointment.all.each do |appointment|
-        appointment.print
-      end
-    elsif input == "3"
-      add_notes
-    elsif input == "4"
-      cancel_appointment
-    elsif input == "5"
-      appointments_by_doctor
-    elsif input == "6"
-      appointments_by_patient
-    elsif input == "debug"
-      binding.pry
-    else 
-      puts "Whoops! I didn't understand that command".red
+def handle_user_choice(choice)
+  if choice == "1"
+    add_appointment
+  elsif choice == "2"
+    Appointment.all.each do |appointment|
+      appointment.print
     end
-    main_menu
-    input = gets.chomp
+  elsif choice == "3"
+    add_notes
+  elsif choice == "4"
+    cancel_appointment
+  elsif choice == "5"
+    appointments_by_doctor
+  elsif choice == "6"
+    appointments_by_patient
+  elsif choice == "debug"
+    binding.pry
+  else 
+    puts "Whoops! I didn't understand that command".red
   end
 end
 
@@ -66,11 +63,11 @@ end
 def add_notes
   puts "Pick the number matching the appointment you would like to add notes to".cyan
   Appointment.all.each.with_index(1) do |appointment, index|
-    puts "#{index}. #{appointment.time} with #{appointment.doctor}"
+    puts "#{index}. #{appointment.time} with #{appointment.doctor.name}"
   end
   input_to_index = ask_for_input.to_i - 1
   appointment_to_notate = Appointment.all[input_to_index]
-  puts "What notes would you like to add to the #{appointment_to_notate.time} appointment with #{appointment_to_notate.doctor}?"
+  puts "What notes would you like to add to the #{appointment_to_notate.time} appointment with #{appointment_to_notate.doctor.name}?"
   notes = gets.chomp
   appointment_to_notate.notes = "#{appointment_to_notate.notes}\n\n#{notes}"
   appointment_to_notate.save
@@ -80,7 +77,7 @@ end
 def cancel_appointment
   puts "Pick the number matching the appointment you would like to cancel".cyan
   Appointment.all.each.with_index(1) do |appointment, index|
-    puts "#{index}. #{appointment.time} with #{appointment.doctor}"
+    puts "#{index}. #{appointment.time} with #{appointment.doctor.name}"
   end
   input_to_index = ask_for_input.to_i - 1
   appointment_to_cancel = Appointment.all[input_to_index]
