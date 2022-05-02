@@ -1,7 +1,7 @@
 class Walk < ActiveRecord::Base
   # 🚧 🚧 🚧
   # Rework associations between Walk -> Dog to many-to-many
-  has_many :dog_walks
+  has_many :dog_walks, dependent: :destroy
   has_many :dogs, through: :dog_walks
 
   # 🚧 🚧 🚧 
