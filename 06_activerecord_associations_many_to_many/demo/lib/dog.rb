@@ -1,20 +1,45 @@
 class Dog < ActiveRecord::Base
+  ## 🚧 🚧 🚧 
+  # Rework associations between Dog -> Walks to many-to-many
   has_many :walks
   has_many :feedings
 
+  # 🚧 🚧 🚧 
+  # refactor this to use AR query methods instead of filter
   def self.needs_feeding
     self.all.filter do |dog|
       dog.needs_a_meal?
     end
   end
 
+  # 🚧 🚧 🚧 
+  # refactor this to use AR query methods instead of filter
   def self.needs_walking
     self.all.filter do |dog|
       dog.needs_a_walk?
     end
   end
 
+  # 🚧 🚧 🚧 
+  # add last_walked_at method to query related walks and return either:
+  #   the time of the most recent walk or
+  #   nil if there is no such walk
 
+  # 🚧 🚧 🚧 
+  # add last_fed_at method to query related feedings and return either:
+  #   the time of the most recent feeding or
+  #   nil if there is no such feeding
+  
+  
+  # 🚧 🚧 🚧 
+  # Once these work, we can remove our last_walked_at and last_fed_at columns 
+  # these values can both now be calculated from the times stored in the walks
+  # and feedings tables.
+
+
+  # 🚧 🚧 🚧 
+  # Once the last_walked_at and last_fed_at methods are built, we'll need to remove 
+  # the calls to update those columns within the `walk` and `feed` methods below
   def walk
     now = Time.now
     self.update(last_walked_at: now)
@@ -53,84 +78,6 @@ class Dog < ActiveRecord::Base
     puts "  last fed at: #{last_fed_at}"
     puts ""
   end
-
-  # attr_accessor :name, :age, :breed, :favorite_treats, :last_walked_at, :last_fed_at
-  # attr_reader :id
-  # def initialize(id: nil, name:, age:, breed:, favorite_treats:, last_walked_at: nil, last_fed_at: nil)
-  #   @id = id
-  #   @name = name
-  #   @age = age
-  #   @breed = breed
-  #   @favorite_treats = favorite_treats
-  #   @last_walked_at = last_walked_at
-  #   @last_fed_at = last_fed_at
-  # end
-
-   # @@all = nil
-
-  # def self.all
-  #   if @@all 
-  #     @@all
-  #   else
-  #     rows = DB.execute("SELECT * FROM dogs")
-  #     @@all = rows.map do |row|
-  #       self.new_from_row(row)
-  #     end
-  #   end
-  # end
-
-  # def self.new_from_row(row)
-  #   self.new(row.transform_keys(&:to_sym))
-  # end
-
-  # def self.create(attributes) 
-  #   self.new(attributes).save
-  # end
-
-  #  def save
-  #   if id 
-  #     query = <<-SQL
-  #       UPDATE dogs
-  #       SET name = ?,
-  #           age = ?,
-  #           breed = ?,
-  #           favorite_treats = ?,
-  #           last_walked_at = ?,
-  #           last_fed_at = ?
-  #       WHERE
-  #           id = ? 
-  #     SQL
-  #     DB.execute(
-  #       query,
-  #       self.name,
-  #       self.age,
-  #       self.breed,
-  #       self.favorite_treats,
-  #       self.last_walked_at && self.last_walked_at.strftime('%Y-%m-%d %H:%M:%S'),
-  #       self.last_fed_at && self.last_fed_at.strftime('%Y-%m-%d %H:%M:%S'),
-  #       self.id
-  #     )
-  #   else
-  #     query = <<-SQL
-  #       INSERT INTO dogs 
-  #       (name, age, breed, favorite_treats, last_walked_at, last_fed_at)
-  #       VALUES
-  #       (?, ?, ?, ?, ?, ?)
-  #     SQL
-  #     DB.execute(
-  #       query,
-  #       self.name,
-  #       self.age,
-  #       self.breed,
-  #       self.favorite_treats,
-  #       self.last_walked_at,
-  #       self.last_fed_at
-  #     )
-  #     @id = DB.execute("SELECT last_insert_rowid()")[0]["last_insert_rowid()"]
-  #     Dog.all << self
-  #   end
-  #   self
-  # end
 
 
 end

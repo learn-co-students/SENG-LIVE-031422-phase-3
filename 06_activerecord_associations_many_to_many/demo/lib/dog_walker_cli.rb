@@ -180,7 +180,7 @@ end
 def prompt_user_to_choose_dog
   PROMPT.select("Which dog would you like to choose?") do |menu|
     Dog.all.each do |dog|
-      menu.choice dog.name, dog
+      menu.choice "#{dog.name} (#{dog.breed})", dog
     end
     menu.choice "back"
   end

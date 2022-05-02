@@ -20,30 +20,29 @@
 ### Key Refactors for Dog Walker CLI
 
 - Migrations
+  - `dog_walks` table
+    - dog_id (foreign key)
+    - walk_id (foreign key)
+  - `walks` table
+    - remove reference to dogs
   - `dogs` table
     - name (string)
     - age (string)
     - breed (string)
     - favorite_treats (string)
-    - last_fed_at (datetime)
-    - last_walked_at (datetime)
-  - `walks` table
-    - time (datetime)
-  - `dog_walks` table
-    - dog_id (foreign key)
-    - walk_id (foreign key)
-  - `feedings` table
-    - time (datetime)
-    - dog_id (integer foreign key)
-- Dog class
-  
+    - ~~last_fed_at (datetime)~~
+    - ~~last_walked_at (datetime)~~
+- `DogWalk` class
+  - Add associations with Dog and Walk
+- `Dog` class
+  - Rework associations with `Walk` to be many-to-many
+  - Add a method `last_walked_at` that queries the walks
   - For the `walk` method, we'll:
-    - update the `last_walked_at` column to the current time
+    - remove the update to the `last_walked_at` column we're removing
     - and create a new walk at the current time that belongs to the dog.
   - For the `feed` method, we'll
-    - update the `last_fed_at` column to the current time
+    - remove the update tp the `last_fed_at` column we're removing
     - create a new feeding at the current time that belongs to the dog.
-  - For the `needs_a_walk?` and `needs_a_meal?` we'll use the methods `last_fed_at` and `last_walked_at` instead of accessing instance variable values directly because we want the column values from the database at this point.
   
 - In CLI (this work is done ahead of time due to time constraints but we'll review it)
   - Add menu options for viewing all of a dog's walks or feedings.
@@ -55,7 +54,7 @@
 ### Logistics
 
 - The code for our cli will be written in the file `lib/dog_walker_cli.rb`. 
-- We'll have: `lib/dog.rb`, `lib/walk.rb` and `lib/feeding.rb` files where our `Dog`, `Walk` and `Feeding` classes are defined. 
+- We'll have: `lib/dog.rb`, `lib/walk.rb`, `lib/dog_walk.rb` and `lib/feeding.rb` files where our `Dog`, `Walk` and `Feeding` classes are defined. 
 - We need to use `rake` to add migration files to create our database tables
 - Again, we'll start our cli application by running the following command in our terminal:
 
