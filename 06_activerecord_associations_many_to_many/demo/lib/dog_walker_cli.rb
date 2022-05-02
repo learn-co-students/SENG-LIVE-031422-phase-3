@@ -1,8 +1,10 @@
 PROMPT = TTY::Prompt.new(interrupt: :exit)
 def start_cli
   puts "hello! Welcome to the Dog Walker CLI"
-  main_menu
-  handle_user_choice
+  loop do 
+    main_menu
+    handle_user_choice(ask_for_input)
+  end
 end
 
 def main_menu
@@ -19,24 +21,19 @@ def print_options
   puts "  exit to leave the program".cyan
 end
 
-def handle_user_choice
-  input = ask_for_input
-  while input != "exit"
-    if input == "1"
-      add_dog.print
-    elsif input == "2"
-      dog_info
-    elsif input == "3"
-      create_walk
-    elsif input == "4"
-      walk_info
-    elsif input == "debug" 
-      binding.pry
-    else 
-      puts "Whoops! I didn't understand your choice".red
-    end
-    main_menu
-    input = ask_for_input
+def handle_user_choice(choice)
+  if choice == "1"
+    add_dog.print
+  elsif choice == "2"
+    dog_info
+  elsif choice == "3"
+    create_walk
+  elsif choice == "4"
+    walk_info
+  elsif choice == "debug" 
+    binding.pry
+  else 
+    puts "Whoops! I didn't understand your choice".red
   end
 end
 
