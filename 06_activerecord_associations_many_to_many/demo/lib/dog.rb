@@ -1,34 +1,53 @@
 class Dog < ActiveRecord::Base
   ## 🚧 🚧 🚧 
   # Rework associations between Dog -> Walks to many-to-many
-  has_many :walks
+  has_many :dog_walks, dependent: :destroy
+  has_many :walks, through: :dog_walks
   has_many :feedings
 
   # 🚧 🚧 🚧 
   # refactor this to use AR query methods instead of filter
   def self.needs_feeding
-    self.all.filter do |dog|
-      dog.needs_a_meal?
-    end
+    # self.all.filter do |dog|
+    #   dog.needs_a_meal?
+    # end
+    recently_fed_dogs = self.joins(:feedings).where({
+      feedings: {
+        time: 3.hours.ago..Time.now
+      }
+    }).pluck(:id)
+    self.where.not({id: recently_fed_dogs})
   end
 
   # 🚧 🚧 🚧 
   # refactor this to use AR query methods instead of filter
   def self.needs_walking
-    self.all.filter do |dog|
-      dog.needs_a_walk?
-    end
+    # self.all.filter do |dog|
+    #   dog.needs_a_walk?
+    # end
+    recently_walked_dogs = self.joins(:walks).where({
+      walks: {
+        time: 3.hours.ago..Time.now
+      }
+    }).pluck(:id)
+    self.where.not({id: recently_walked_dogs})
   end
 
   # 🚧 🚧 🚧 
   # add last_walked_at method to query related walks and return either:
   #   the time of the most recent walk or
   #   nil if there is no such walk
+  def last_walked_at
+    self.walks.order(time: :desc).first&.time
+  end
 
   # 🚧 🚧 🚧 
   # add last_fed_at method to query related feedings and return either:
   #   the time of the most recent feeding or
   #   nil if there is no such feeding
+  def last_fed_at
+    self.feedings.order(time: :desc).first&.time
+  end
   
   
   # 🚧 🚧 🚧 
@@ -42,7 +61,7 @@ class Dog < ActiveRecord::Base
   # the calls to update those columns within the `walk` and `feed` methods below
   def walk
     now = Time.now
-    self.update(last_walked_at: now)
+    # self.update(last_walked_at: now)
     self.walks.create(time: now)
   end
 
@@ -56,7 +75,7 @@ class Dog < ActiveRecord::Base
 
   def feed
     now = Time.now
-    self.update(last_fed_at: now)
+    # self.update(last_fed_at: now)
     self.feedings.create(time: now)
   end
 

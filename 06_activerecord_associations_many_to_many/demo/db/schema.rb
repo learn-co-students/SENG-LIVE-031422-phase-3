@@ -10,15 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_08_185536) do
+ActiveRecord::Schema.define(version: 2022_05_02_220416) do
+
+  create_table "dog_walks", force: :cascade do |t|
+    t.integer "dog_id"
+    t.integer "walk_id"
+    t.boolean "pooped"
+    t.index ["dog_id"], name: "index_dog_walks_on_dog_id"
+    t.index ["walk_id"], name: "index_dog_walks_on_walk_id"
+  end
 
   create_table "dogs", force: :cascade do |t|
     t.string "name"
     t.string "age"
     t.string "breed"
     t.string "favorite_treats"
-    t.datetime "last_fed_at"
-    t.datetime "last_walked_at"
   end
 
   create_table "feedings", force: :cascade do |t|
@@ -29,10 +35,9 @@ ActiveRecord::Schema.define(version: 2022_04_08_185536) do
 
   create_table "walks", force: :cascade do |t|
     t.datetime "time"
-    t.integer "dog_id"
-    t.index ["dog_id"], name: "index_walks_on_dog_id"
   end
 
+  add_foreign_key "dog_walks", "dogs"
+  add_foreign_key "dog_walks", "walks"
   add_foreign_key "feedings", "dogs"
-  add_foreign_key "walks", "dogs"
 end
