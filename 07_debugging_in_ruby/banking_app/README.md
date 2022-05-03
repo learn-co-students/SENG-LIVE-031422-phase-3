@@ -26,6 +26,26 @@ We can start off the process of debugging by asking ourselves the following ques
 - using `rake console`
 - adding `puts` statements
 
+## If we hit an error/bug while working
+
+- What are we trying to do?
+- What's happening instead of that?
+- Why do we think we're getting the current result instead of what we want? (What's the cause of the error?)
+- If our (educated) guess about what's causing the problem is correct, how will we get feedback telling us we're right? (use our debugging/testing tools here)
+- Did we isolate the problem? 
+  - If so, what do we change to get closer to our desired result?
+  - If not, return to guessing at explanations for the current problem.
+
+>Note, this process emphasizes explaining the problem first, rather than immediately trying to fix it. The reason for this is that learning how to identify and isolate the information that your errors/feedback are giving you is going to improve your understanding of the way the language works. This will help you solve problems more efficiently in the future by paying attention to the feedback that you get while you code. I like to think of coding as having a conversation with the computer. You want to make sure it's a balanced conversation. In a good conversation, both sides have a chance to participate. For us, this means we need to take the time to listen to what the computer is telling us before we respond with new code.
+
+## 5 Tasks and How to Apply Debugging Skills/Tools
+
+- How to test whether migrations are correct
+- How to test that association methods are set up properly
+- Figuring out where to put a binding.pry to isolate a problem
+- How to use binding.pry together with rake console and db:seeds
+- How and when to use puts to get meaningful feedback
+
 ## Important Action Items
 
 - **Study problem/task/deliverable**
@@ -41,7 +61,7 @@ We can start off the process of debugging by asking ourselves the following ques
   - The main difference between the two is that `rspec` requires more time/thought/care to set up. Also, tests are files and therefore part of your codebase–so the scenarios that you've used to test your code are actually stored with your code.
   - At this stage, being methodical about how you develop your manual testing/debugging skills in the console will pay off mightily because not only will those skills translate to writing your own tests later on, but there are lots of scenarios where you need quick feedback under time pressure and the console will give you feedback more quickly and directly.
 
-[Discussion HackMD Doc](https://hackmd.io/PNRRGx4eRu26NESUksyyCQ?both)
+[Debugging Reference Guide](https://hackmd.io/PNRRGx4eRu26NESUksyyCQ?both)
 
 ## Example
 
