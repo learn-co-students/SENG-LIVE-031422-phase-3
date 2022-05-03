@@ -1,5 +1,9 @@
 class Bank < ActiveRecord::Base
   has_many :accounts
+  # distinct is added here so we don't get duplicate
+  # users for users who have more than one account
+  # at a particular bank
+  # https://guides.rubyonrails.org/v6.1/association_basics.html#scopes-for-has-many-distinct
   has_many :users, -> { distinct }, through: :accounts
 
   def open_account(user, label, account_type, opening_deposit)

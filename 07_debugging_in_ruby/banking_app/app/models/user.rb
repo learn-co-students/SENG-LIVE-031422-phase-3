@@ -1,6 +1,10 @@
 class User < ActiveRecord::Base
   has_many :accounts
-  has_many :banks, through: :accounts
+  # distinct is added here so we don't get duplicate
+  # banks for users who have more than one account
+  # at a particular bank
+  # https://guides.rubyonrails.org/v6.1/association_basics.html#scopes-for-has-many-distinct
+  has_many :banks, -> { distinct }, through: :accounts
 
   def self.number_one
     # More naive solution with multiple sql queries & iteration in ruby
