@@ -11,11 +11,11 @@
 ## Lectures
 
 1. Ruby Fundamentals
-2. Object Oriented Ruby pt1
-3. Object Oriented Ruby pt2
-4. Intro to Databases
-5. Intro to ActiveRecord
-6. ActiveRecord Associations: Many to Many
+2. Object Oriented Ruby pt1 ([slides](https://p3-02-object-oriented-ruby-part1-slides.netlify.app/#/normal/0/0))
+3. Object Oriented Ruby pt2 ([slides](https://p3-03-object-oriented-ruby-part-2-slides.netlify.app/#/normal/0/0))
+4. Intro to Databases ([slides](https://p3-04-intro-to-databases-slides.netlify.app/#/normal/0/0))
+5. Intro to ActiveRecord ([slides](https://p3-05-intro-to-databases-slides.netlify.app/#/normal/0/0))
+6. ActiveRecord Associations: Many to Many ([slides](https://p3-06-activerecord-associations-many-to-many-slides.netlify.app/#/normal/0/0))
 7. Debugging in Ruby (code challenge prep)
 8. Intro to Sinatra (after code challenge)
 9. Sinatra API CRUD with relationships
