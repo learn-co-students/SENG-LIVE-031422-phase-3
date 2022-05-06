@@ -596,7 +596,7 @@ If you see something like the above then you're good to go!
 
 ## Sending Requests via Postman
 
-Try opening [this workspace](https://www.postman.com/dakota27/workspace/meetup-clone/collection/3907819-183b2073-d616-4b8d-9ebc-96aacb7cb19f) in Postman to get the details for the requests we want to send.
+Try opening [this workspace](https://www.postman.com/dakota27/workspace/dogwalkerapplication/request/3907819-afb45b42-8a10-4ca2-9e59-4a5a2c45048a) in Postman to get the details for the requests we want to send.
 
 When we create a dog, we'll send this as the raw body in JSON format:
 
