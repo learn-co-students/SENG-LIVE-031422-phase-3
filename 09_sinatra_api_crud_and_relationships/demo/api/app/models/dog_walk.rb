@@ -14,5 +14,9 @@ class DogWalk < ActiveRecord::Base
   #   walk.formatted_time
   # end
 
+  def walk_time=(time)
+    self.walk = Walk.create(time: time)
+  end
+
  
 end

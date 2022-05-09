@@ -23,6 +23,7 @@ class DogsController < ApplicationController
     dog = Dog.find(params[:id])
     dog.destroy
     serialize(dog)
+    # status 204
   end
 
   private 
@@ -37,7 +38,12 @@ class DogsController < ApplicationController
 
   def serialize(dog)
     dog.to_json(
-      methods: :age
+      methods: [:age],
+      include: {
+        dog_walks: {
+          methods: [:formatted_time]
+        }
+      }
     )
   end
 end
