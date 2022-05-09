@@ -2,13 +2,14 @@
 
 Question to ponder before we start:
 
->Is it better to keep all of our fetches/state in a container and pass down state and callbacks as props or to add state and fetch calls throughout the component hierarchy where necessary? Explain the benefits of your choice.
+>Is it better to store our related data in separate pieces of state client side (i.e. posts and comments) or to have the related data stored as a property of the parent (i.e. posts each have a comments property)? Explain the benefits of your choice.
 
 ## Today's Focus
 
 - How we make decisions about how to structure data from our API given the structure and needs of our react application
 - considering alternatives for how to store related data in react state.
 - retrieving related records via our API and persisting them to React state.
+- creating related records via POST requests
 - using the options on the `to_json` method to include associated database records in API responses.
 
 
